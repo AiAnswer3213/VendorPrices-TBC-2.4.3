@@ -1,0 +1,6 @@
+## Interface: 20400
+## Title: Vendor Prices
+## Author: Sattva
+## Version: 1.0
+
+VendorPrices.lua
