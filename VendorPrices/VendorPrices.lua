@@ -28,7 +28,9 @@ tooltip:SetScript("OnShow", function()
         if itemID then
             local numItemID = tonumber(itemID)
             local shiftDown = IsShiftKeyDown()
-            AddVendorPrice(GameTooltip, numItemID, GameTooltip.itemCount or 1, shiftDown)
+            if not MerchantFrame:IsVisible() then
+              AddVendorPrice(GameTooltip, numItemID, GameTooltip.itemCount or 1, shiftDown)
+            end
         end
     end
 end)
@@ -44,7 +46,9 @@ local function ItemRefTooltipHook(self)
         local itemID = string.match(itemLink, "item:(%d+)")
         if itemID then
             local numItemID = tonumber(itemID)
-            AddVendorPrice(self, numItemID, 1, false)
+            if not MerchantFrame:IsVisible() then
+              AddVendorPrice(self, numItemID, 1, false)
+            end
         end
     end
 end
