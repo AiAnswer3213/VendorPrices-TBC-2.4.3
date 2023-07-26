@@ -55,6 +55,16 @@ end
 
 hooksecurefunc(ItemRefTooltip, "SetHyperlink", ItemRefTooltipHook)
 
+local function GetItemLinkByName(name)
+    for itemID = 1, 25818 do
+        local itemName, hyperLink, itemQuality = GetItemInfo(itemID)
+        if (itemName and itemName == name) then
+            local _, _, _, hex = GetItemQualityColor(tonumber(itemQuality))
+            return hex.. "|H"..hyperLink.."|h["..itemName.."]|h|r"
+        end
+    end
+end
+
   local HookSetBagItem = GameTooltip.SetBagItem
   function GameTooltip.SetBagItem(self, container, slot)
     GameTooltip.itemLink = GetContainerItemLink(container, slot)
