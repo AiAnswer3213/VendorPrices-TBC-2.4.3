@@ -55,14 +55,26 @@ end
 
 hooksecurefunc(ItemRefTooltip, "SetHyperlink", ItemRefTooltipHook)
 
+local LinkByNameCache = {}
+
 local function GetItemLinkByName(name)
+    if LinkByNameCache[name] then
+      local link = LinkByNameCache[name]
+      if link == "n" then return end
+      return link
+    end
+
     for itemID = 1, 25818 do
         local itemName, hyperLink, itemQuality = GetItemInfo(itemID)
         if (itemName and itemName == name) then
             local _, _, _, hex = GetItemQualityColor(tonumber(itemQuality))
-            return hex.. "|H"..hyperLink.."|h["..itemName.."]|h|r"
+            local link = hex.. "|H"..hyperLink.."|h["..itemName.."]|h|r"
+            LinkByNameCache[name] = link
+            return link
         end
     end
+    -- No match for name, such as random enchantment items?
+    LinkByNameCache[name] = "n" -- don't look again
 end
 
   local HookSetBagItem = GameTooltip.SetBagItem
