@@ -105,8 +105,9 @@ end
 
   local HookSetInboxItem = GameTooltip.SetInboxItem
   function GameTooltip.SetInboxItem(self, mailID, attachmentIndex)
-    local itemName, itemTexture, inboxItemCount, inboxItemQuality = GetInboxItem(mailID)
+    local itemName, itemTexture, inboxItemCount, inboxItemQuality = GetInboxItem(mailID, attachmentIndex)
     GameTooltip.itemLink = GetItemLinkByName(itemName)
+    GameTooltip.itemCount = inboxItemCount
     return HookSetInboxItem(self, mailID, attachmentIndex)
   end
 
