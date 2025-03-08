@@ -6,10 +6,10 @@ local function AddVendorPrice(frame, itemID, count, shiftDown)
     local vendorPrice = vendorPrices[itemID]
     if vendorPrice and count and count > 0 then
         if shiftDown then
-            SetTooltipMoney(frame, vendorPrice)
+            SetTooltipMoney(frame, vendorPrice, nil, "Vendor x1")
         else
             local totalVendorPrice = vendorPrice * count
-            SetTooltipMoney(frame, totalVendorPrice)
+            SetTooltipMoney(frame, totalVendorPrice, nil, "Vendor x" .. count)
         end
         frame:Show()
     end
